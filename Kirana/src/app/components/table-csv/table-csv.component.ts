@@ -18,13 +18,18 @@ export class TableCSVComponent implements OnInit {
   peopleCounter: number=0;
   repeatPeople:number=0;
   headerColumnas: string[] = ['Nombre', 'Correo Electronico', 'Telefono'];
-  constructor(private upCsvService: UpCsvService) {}
+  isLoading: boolean = true;
+  constructor(private upCsvService: UpCsvService) {
+    this.isLoading=true;
+  }
   reload() {
+    this.isLoading=true;
     window.location.reload();
   }
   ngOnInit(): void {
     this.upCsvService.resultApi?.subscribe({
       next: (response: any) => {
+        this.isLoading = false;
         if (Object.keys(response).includes('error')) {
           swal.fire({
             icon: 'error',
@@ -48,6 +53,7 @@ export class TableCSVComponent implements OnInit {
         }
       },
       error: (response: any) => {
+        this.isLoading=true;
         swal.fire({
           icon: 'error',
           text: `Error en el servidor`,

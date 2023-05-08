@@ -1,7 +1,10 @@
 
 
 <div class="d-flex justify-content-center ">
-<div class="row g-0">
+<div [hidden]="!isLoading" class="row">
+  <div  class="col"><div class="loader"></div></div>
+</div>
+<div [hidden]="isLoading" class="row g-0">
   <div class="col-sm-12">
     <!-- Tabla dinámica-->
     <!-- Titulo-->
