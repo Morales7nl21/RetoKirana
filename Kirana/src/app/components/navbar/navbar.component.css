@@ -1,0 +1,10 @@
+#tittle_head
+{
+  font-size: x-large;
+  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#tittle_head:hover {
+  color: white;
+}

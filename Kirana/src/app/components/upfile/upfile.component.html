@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="d-flex justify-content-center mt-3 pt-3">
+    <div class="row">
+      <div class="col" [hidden]="isSelectedFile">
+       <h3> Por favor, arrastre su archivo CSV para ser analizado</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Archivo seleccionado-->
+  <div [hidden]="!isSelectedFile"  class="row">
+    <div class="col col-sm-8">
+      <p class="alert alert-info mt-2 " role="alert">
+        El archivo {{name}} se ha seleccionado, presione en <b>aceptar</b>  para analizar.
+      </p>
+    </div>
+
+    <div class="col col-sm-4 ">
+        <button [hidden]="isAcceptedFile" (click)="acceptFile()" type="button" class="btn btn-success mt-2">Aceptar</button>
+        <button [hidden]="isAcceptedFile" (click)="onRemove()" type="button" class="btn btn-warning mt-2">Volver a elegir</button>
+    </div>
+
+  </div>
+ <!-- Fin archivo seleccionado-->
+  <!-- <div class="inputFile">
+    <input class="form-control form-control-lg" id="formFileLg"  type="file"  (change)="onSelect($event)"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+  </div> -->
+
+  <ngx-dropzone [hidden]="isSelectedFile" (change)="onSelect2($event)">
+    <ngx-dropzone-label> Arrastre el archivo</ngx-dropzone-label>
+
+  </ngx-dropzone>
+
+</div>
+
+
+

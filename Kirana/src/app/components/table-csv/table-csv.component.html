@@ -1,0 +1,84 @@
+
+
+<div class="d-flex justify-content-center ">
+<div class="row g-0">
+  <div class="col-sm-12">
+    <!-- Tabla dinámica-->
+    <!-- Titulo-->
+    <!-- Cierre Titulo-->
+    <div class="row">
+      <div class="col col-sm-8">
+        <mat-form-field class="mt-2">
+          <mat-label>Buscar</mat-label>
+          <!-- Al presionar una tecla se manda  ala funcion de filtrado-->
+          <input
+            type="text"
+            matInput
+            (keyup)="filtrar($event)"
+            placeholder="Busqueda"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col col-sm-4">
+        <button type="button" (click)="reload()" class="btn btn-secondary mt-3">Regresar</button>
+      </div>
+    </div>
+
+   <!-- Inicio de creacion de tabla con los elementos-->
+    <div class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8"
+      >
+
+        <ng-container matColumnDef="Nombre">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>Nombre</th>
+
+          <td mat-cell *matCellDef="let pu">
+              {{pu.nombre }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Correo Electronico">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>
+            Correo electrónico
+          </th>
+          <td mat-cell *matCellDef="let pu">
+            <div *ngIf="pu.validEmail === 'correctEmail'">
+              {{pu.correo }}
+            </div>
+            <div *ngIf="pu.validEmail === 'incorrectEmail'" class="incorrectEmail">
+              {{pu.correo }}
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Telefono">
+          <th mat-sort-header mat-header-cell *matHeaderCellDef>Teléfono</th>
+          <td mat-cell *matCellDef="let pu">
+            <div *ngIf="pu.validPhone === 'incorrectPhone'" class="incorrectPhone">
+              {{pu.telefono }}
+            </div>
+            <div *ngIf="pu.validPhone === 'correctPhone'">
+              {{pu.telefono }}
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="headerColumnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: headerColumnas" [ngClass]="{'RepeatedRow':  (row.repeated=== 'RepeatedRow')}">{{row}}</tr>
+      </table>
+      <!-- Paginadores a tabla-->
+      <mat-paginator
+        [pageSizeOptions]="[5,10, 20, 30]"
+        showFirstLastButtons
+        aria-label="Página a seleccionar"
+      >
+        Página
+      </mat-paginator>
+      <!-- Paginadores a tabla-->
+    </div>
+    <!-- Cierre Tabla dinámica-->
+  </div>
+</div>
+
