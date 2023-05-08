@@ -74,7 +74,8 @@ export const getCSVData = async (file, isSelfRepeated, res) => {
       
       dataFinalToSend={
         dataCSV:dataJsonToSend,
-        peopleCounter:dataWithoutDuplicate.size
+        peopleCounter:dataWithoutDuplicate.size,
+        repeatPeople:repeatNumberCounted
       }
       console.log(dataFinalToSend)
       res.send(dataFinalToSend);      

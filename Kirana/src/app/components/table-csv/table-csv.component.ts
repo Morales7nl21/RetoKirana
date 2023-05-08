@@ -16,6 +16,7 @@ export class TableCSVComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
   peopleCounter: number=0;
+  repeatPeople:number=0;
   headerColumnas: string[] = ['Nombre', 'Correo Electronico', 'Telefono'];
   constructor(private upCsvService: UpCsvService) {}
   reload() {
@@ -38,6 +39,7 @@ export class TableCSVComponent implements OnInit {
         } else {
           console.log("Response",response)
           this.peopleCounter = response['peopleCounter'];
+          this.repeatPeople=response['repeatPeople'];
           console.log("Keys",Object.keys(response))
           this.dataSource = new MatTableDataSource(response['dataCSV']);
           this.dataSource.sort = this.sort;
