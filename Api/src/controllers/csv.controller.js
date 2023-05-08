@@ -9,7 +9,7 @@ export const getCSVData = async (file, isSelfRepeated, res) => {
   const mapEmail = new Map();
   const mapTelefono = new Map();
   const dataJsonToSend = []; // Contains data file like name, email, telefono using JSON format
-  const dataFinalToSend = []; //Contains datafile + cont of repeated rows 
+  let dataFinalToSend = {}; //Contains datafile + cont of repeated rows 
   let repeatNumberCounted = 0;
 
   fs.createReadStream(file.path)
@@ -72,7 +72,12 @@ export const getCSVData = async (file, isSelfRepeated, res) => {
       if (isSelfRepeated)
         repeatNumberCounted = contDataSelfRepeated(mapName, mapEmail, mapTelefono);
       
-      res.send(dataJsonToSend);      
+      dataFinalToSend={
+        dataCSV:dataJsonToSend,
+        peopleCounter:dataWithoutDuplicate.size
+      }
+      console.log(dataFinalToSend)
+      res.send(dataFinalToSend);      
     });
   
 };
