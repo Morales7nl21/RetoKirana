@@ -65,7 +65,7 @@ export const getCSVData = async (file, isSelfRepeated, res) => {
 
         //Adding files to new csv BD
         const [resultSet] = await pool.query(
-          `call sp_insert_new_persons_csv(${id_new_csv.ID}, '${name}', '${email}', '${telefono}')`
+          `call sp_insert_new_persons_csv(${id_new_csv.ID}, "${name}", "${email}", "${telefono}")`
         );
       }
 
