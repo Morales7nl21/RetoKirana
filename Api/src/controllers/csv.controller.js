@@ -77,7 +77,7 @@ export const getCSVData = async (file, isSelfRepeated, res) => {
         peopleCounter:dataWithoutDuplicate.size,
         repeatPeople:repeatNumberCounted
       }
-      console.log(dataFinalToSend)
+      //console.log(dataFinalToSend)
       res.send(dataFinalToSend);      
     });
   
