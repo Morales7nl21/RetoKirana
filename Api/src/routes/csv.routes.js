@@ -9,7 +9,7 @@ const upload = multer({ dest: os.tmpdir() });
 router.post('/getcsvdata', upload.single('CSV'), function(req, res) {
     
     const file = req.file;
-    const isSelfRepeated = false;
+    const isSelfRepeated = true;
     getCSVData(file, isSelfRepeated,res);
     
   });
