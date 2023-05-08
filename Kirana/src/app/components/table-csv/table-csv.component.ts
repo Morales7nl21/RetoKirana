@@ -15,6 +15,7 @@ export class TableCSVComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
+  peopleCounter: number=0;
   headerColumnas: string[] = ['Nombre', 'Correo Electronico', 'Telefono'];
   constructor(private upCsvService: UpCsvService) {}
   reload() {
@@ -35,7 +36,10 @@ export class TableCSVComponent implements OnInit {
           });
 
         } else {
-          this.dataSource = new MatTableDataSource(response);
+          console.log("Response",response)
+          this.peopleCounter = response['peopleCounter'];
+          console.log("Keys",Object.keys(response))
+          this.dataSource = new MatTableDataSource(response['dataCSV']);
           this.dataSource.sort = this.sort;
           this.paginator._intl.itemsPerPageLabel = 'Página';
           this.dataSource.paginator = this.paginator;
@@ -44,10 +48,13 @@ export class TableCSVComponent implements OnInit {
       error: (response: any) => {
         swal.fire({
           icon: 'error',
-          text: `${response}`,
+          text: `Error en el servidor`,
           heightAuto: false,
+        }).then((result)=>{
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         });
-        window.location.reload();
       },
     });
   }
