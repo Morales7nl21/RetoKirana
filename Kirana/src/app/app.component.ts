@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IndexLogicService } from './services/index-logic.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Kirana';
+
+  constructor(private indexLogicService:IndexLogicService){
+  }
+  getIsAccepted(){
+    return this.indexLogicService.getIsAccepted();
+  }
 }
